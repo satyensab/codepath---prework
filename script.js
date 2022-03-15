@@ -1,22 +1,28 @@
 //global constants
-const clueHoldTime = 1000; //how long to hold each clue's light/sound
 const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue
 
 //Global Variables
-var pattern = [1, 1, 3, 4, 1, 2, 4, 3];
+var pattern = [];
 var progress = 0;
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;
 var guessCounter = 0;
+var clueHoldTime = 1000; //how long to hold each clue's light/sound
+var mistakes;
+
 
 function startGame() {
   //initialize game variables
+  mistakes = 0;
+  clueHoldTime = 1000
   progress = 0;
   gamePlaying = true;
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
+  random();
+  console.log(pattern)
   playClueSequence();
 }
 
@@ -44,6 +50,8 @@ function playSingleClue(btn) {
 function playClueSequence() {
   guessCounter = 0;
   let delay = nextClueWaitTime;
+  clueHoldTime= clueHoldTime-60
+  console.log("clueHoldTime: " + clueHoldTime)
   for (let i = 0; i <= progress; i++) {
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms");
     setTimeout(playSingleClue, delay, pattern[i]);
@@ -68,7 +76,7 @@ function guess(btn) {
     return;
   } else {
     if (pattern[guessCounter] == btn) {
-      //Correct gyess
+      //Correct guess
       if (guessCounter == progress) {
         if (progress == pattern.length - 1) {
           winGame();
@@ -80,18 +88,30 @@ function guess(btn) {
       } else {
         guessCounter++;
       }
-    } else {
+    } 
+    else if(mistakes < 2){
+      mistakes+=1
+    }
+    else {
       loseGame();
     }
   }
 }
 
+function random(){
+  pattern = Array.from({length: 8}, () => Math.floor(Math.random() * 8));
+}
+
 // Sound Synthesis Functions
 const freqMap = {
-  1: 261.6,
-  2: 329.6,
-  3: 392,
-  4: 466.2,
+  1: 161.6,
+  2: 216,
+  3: 270,
+  4: 320,
+  5: 390,
+  6: 430,
+  7: 480,
+  8: 510,
 };
 function playTone(btn, len) {
   o.frequency.value = freqMap[btn];

@@ -7,6 +7,7 @@ Submitted by: **Satyen Sabnis**
 Time spent: **5** hours spent in total
 
 Link to project: https://glitch.com/edit/#!/light-and-sound-memory--game
+
 Live Website: https://light-and-sound-memory--game.glitch.me
 
 ## Required Functionality

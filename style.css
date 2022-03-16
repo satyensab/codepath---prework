@@ -9,14 +9,14 @@ html {
 
 /* adjust typography defaults */
 body {
-  font-family: helvetica,arial, sans-serif;
+  font-family:  Trebuchet MS', sans-serif;
   margin: 2em;
   background-color: darkslategrey;
   color:white;
 }
 
 h1 {
-  font-family: verdana, arial, sans-serif;
+  font-family: 'Trebuchet MS', sans-serif;
 }
 
 button {
@@ -90,4 +90,5 @@ button {
   height:200px;
   margin:2px;
 }
+
 

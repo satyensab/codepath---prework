@@ -14,11 +14,16 @@ var mistakes;
 
 
 function startGame() {
+  progress = []
   //initialize game variables
   mistakes = 0;
   clueHoldTime = 1000
   progress = 0;
   gamePlaying = true;
+  document.getElementById("average_mem").classList.add("hidden")
+  document.getElementById("bad_mem").classList.add("hidden")
+  document.getElementById("amazing_mem").classList.add("hidden")
+  
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   random();
@@ -32,11 +37,11 @@ function stopGame() {
   document.getElementById("stopBtn").classList.add("hidden");
 }
 
-function lightButton(btn) {
-  document.getElementById("button" + btn).classList.add("lit");
+function lightButton(btn){
+  document.getElementById("button"+btn).classList.add("lit")
 }
-function clearButton(btn) {
-  document.getElementById("button" + btn).classList.remove("lit");
+function clearButton(btn){
+  document.getElementById("button"+btn).classList.remove("lit")
 }
 
 function playSingleClue(btn) {
@@ -50,7 +55,7 @@ function playSingleClue(btn) {
 function playClueSequence() {
   guessCounter = 0;
   let delay = nextClueWaitTime;
-  clueHoldTime= clueHoldTime-60
+  clueHoldTime= clueHoldTime-70
   console.log("clueHoldTime: " + clueHoldTime)
   for (let i = 0; i <= progress; i++) {
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms");
@@ -60,13 +65,20 @@ function playClueSequence() {
   }
 }
 
-function loseGame() {
+function loseGame(progress) {
   stopGame();
-  alert("Game Over. You lost.");
+  if (progress < 3){
+    document.getElementById("bad_mem").classList.remove("hidden")
+  }
+  if (progress > 4){
+    document.getElementById("average_mem").classList.remove("hidden")
+  }
+  alert("Game Over! You lost.");
 }
 
 function winGame() {
   stopGame();
+  document.getElementById("amazing_mem").classList.remove("hidden")
   alert("You correctly guessed the pattern! Game Over. You win!");
 }
 
@@ -93,13 +105,13 @@ function guess(btn) {
       mistakes+=1
     }
     else {
-      loseGame();
+      loseGame(progress);
     }
   }
 }
 
 function random(){
-  pattern = Array.from({length: 8}, () => Math.floor(Math.random() * 8));
+  pattern = Array.from({length: 8}, () => Math.floor(Math.random() * 9));
 }
 
 // Sound Synthesis Functions

@@ -66,8 +66,7 @@ Throughout this whole pre-work assignment my main challenge was actually figurin
 
 
 ## Interview Recording URL Link
-
-[https://www.loom.com/share/b022c1516e5e48bc96dbcf09b38b32b8](your-link-here)
+https://www.loom.com/share/b022c1516e5e48bc96dbcf09b38b32b8 
 
 
 ## License
